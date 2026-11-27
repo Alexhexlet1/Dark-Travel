@@ -1,0 +1,90 @@
+/* Общие ретро-настройки */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace; /* Пиксельный/моноширинный вайб */
+}
+
+body {
+    background-color: #121216;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Главная Grid-сетка игры */
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto 400px 180px;
+    grid-template-areas: 
+        "hud hud"
+        "screen screen"
+        "story actions";
+    width: 900px;
+    background: #1c1c24;
+    border: 4px solid #4a4a5a; /* Четкая олдскул рамка */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Элементы сетки */
+.hud-panel     { grid-area: hud; display: flex; gap: 30px; padding: 15px; border-bottom: 4px solid #4a4a5a; background: #15151a; }
+.screen-panel  { grid-area: screen; border-bottom: 4px solid #4a4a5a; overflow: hidden; background: #000; display: flex; justify-content: center; }
+.story-panel   { grid-area: story; padding: 20px; border-right: 4px solid #4a4a5a; line-height: 1.5; font-size: 16px; overflow-y: auto; }
+.actions-panel { grid-area: actions; padding: 20px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+
+/* Картинка локации */
+#location-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated; /* Делает обычные картинки чуть более пиксельными */
+}
+
+/* Статус-бары (HP / MP) */
+.stat-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.stat-label {
+    font-weight: bold;
+    color: #a0a0ba;
+}
+.bar-container {
+    width: 180px;
+    height: 20px;
+    border: 2px solid #4a4a5a;
+    background-color: #2a2a35;
+    padding: 2px;
+}
+.bar-fill {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease-in-out; /* Плавное уменьшение от JS */
+}
+.hp-fill { background-color: #ff3333; box-shadow: inset -5px 0 0 #b30000; }
+.mp-fill { background-color: #3399ff; box-shadow: inset -5px 0 0 #0066cc; }
+
+/* Олдскульные пиксельные кнопки */
+.btn {
+    background-color: #2a2a35;
+    color: #fff;
+    border: 2px solid #5a5a6a;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    transition: all 0.1s ease;
+}
+.btn:hover {
+    background-color: #3a3a4a;
+    border-color: #8a8a9a;
+    color: #ffcc00;
+}
+.btn:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коридорная RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        
+        <!-- ХЕДЕР: Статус-бар игрока (отсюда JS будет брать HP/MP) -->
+        <header class="hud-panel">
+            <div class="stat-group">
+                <span class="stat-label">HP:</span>
+                <div class="bar-container hp-bg">
+                    <div id="hp-bar" class="bar-fill hp-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="stat-group">
+                <span class="stat-label">MP:</span>
+                <div class="bar-container mp-bg">
+                    <div id="mp-bar" class="bar-fill mp-fill" style="width: 80%;"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ЦЕНТР: Экран локации (здесь JS будет менять src картинки) -->
+        <main class="screen-panel">
+            <img id="location-img" src="https://unsplash.com" alt="Локация">
+        </main>
+
+        <!-- НИЗ СЛЕВА: Окно истории (JS будет менять textContent/innerHTML) -->
+        <section class="story-panel">
+            <p id="story-text">Вы стоите перед тяжелой дубовой дверью. Из щелей тянет сыростью и едва уловимым запахом серы. Слышен далекий скрежет.</p>
+        </section>
+
+        <!-- НИЗ СПРАВА: Кнопки действий (JS будет вешать addEventListener) -->
+        <nav id="action-buttons" class="actions-panel">
+            <button class="btn" data-action="next">Выбить дверь плечом</button>
+            <button class="btn" data-action="magic">Использовать заклинание</button>
+            <button class="btn" data-action="back">Отступить назад</button>
+        </nav>
+
+    </div>
+
+</body>
+</html>
