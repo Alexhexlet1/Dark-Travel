@@ -1,90 +1,253 @@
-/* Общие ретро-настройки */
+/* ==========================================================================
+   СТИЛЬ №1: ДРЕВНИЙ КОЖАНЫЙ ГРИМУАР (WITCHCRAFT & ALCHEMY)
+   ========================================================================== */
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace; /* Пиксельный/моноширинный вайб */
+    /* Благородный книжный шрифт с засечками для атмосферы летописи */
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing: 0.3px;
 }
 
 body {
-    background-color: #121216;
-    color: #e0e0e0;
+    background-color: #0b0908; /* Абсолютная темнота старой башни */
+    /* Мягкое янтарное свечение по центру, имитирующее свет догорающей свечи */
+    background-image: radial-gradient(circle, #211811 0%, #080605 100%);
+    color: #d9ceb8; /* Цвет старой бумаги */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* Главная Grid-сетка игры */
+/* Главная книга-гримуар */
 .game-container {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-rows: auto 400px 180px;
+    grid-template-columns: 250px 1fr 290px;
+    grid-template-rows: 80px 380px 190px;
     grid-template-areas: 
-        "hud hud"
-        "screen screen"
-        "story actions";
-    width: 900px;
-    background: #1c1c24;
-    border: 4px solid #4a4a5a; /* Четкая олдскул рамка */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        "hud hud hud"
+        "inventory screen screen"
+        "log story actions";
+    width: 1150px;
+    background: #1b1310; /* Темная тисненая кожа */
+    
+    /* Изящная винтажная двойная рамка */
+    border: 1px solid #4a3625;
+    outline: 4px solid #140d0a;
+    box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.95), 
+        inset 0 0 60px rgba(11, 7, 5, 0.9);
 }
 
-/* Элементы сетки */
-.hud-panel     { grid-area: hud; display: flex; gap: 30px; padding: 15px; border-bottom: 4px solid #4a4a5a; background: #15151a; }
-.screen-panel  { grid-area: screen; border-bottom: 4px solid #4a4a5a; overflow: hidden; background: #000; display: flex; justify-content: center; }
-.story-panel   { grid-area: story; padding: 20px; border-right: 4px solid #4a4a5a; line-height: 1.5; font-size: 16px; overflow-y: auto; }
-.actions-panel { grid-area: actions; padding: 20px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
-
-/* Картинка локации */
-#location-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    image-rendering: pixelated; /* Делает обычные картинки чуть более пиксельными */
+/* Настройки панелей (страниц книги) */
+.hud-panel { 
+    grid-area: hud; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 30px; 
+    border-bottom: 2px solid #3d2b1d; 
+    background: #120b08; /* Глубокий коньячный оттенок */
+    box-shadow: inset 0 -5px 15px rgba(0,0,0,0.5);
 }
 
-/* Статус-бары (HP / MP) */
-.stat-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.inventory-panel { 
+    grid-area: inventory; 
+    padding: 20px 15px; 
+    border-right: 2px solid #3d2b1d; 
+    background: #170f0c; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    box-shadow: inset -5px 0 15px rgba(0,0,0,0.3);
 }
-.stat-label {
-    font-weight: bold;
-    color: #a0a0ba;
-}
-.bar-container {
-    width: 180px;
-    height: 20px;
-    border: 2px solid #4a4a5a;
-    background-color: #2a2a35;
-    padding: 2px;
-}
-.bar-fill {
-    height: 100%;
-    width: 0;
-    transition: width 0.3s ease-in-out; /* Плавное уменьшение от JS */
-}
-.hp-fill { background-color: #ff3333; box-shadow: inset -5px 0 0 #b30000; }
-.mp-fill { background-color: #3399ff; box-shadow: inset -5px 0 0 #0066cc; }
 
-/* Олдскульные пиксельные кнопки */
-.btn {
-    background-color: #2a2a35;
-    color: #fff;
-    border: 2px solid #5a5a6a;
-    padding: 10px;
-    cursor: pointer;
-    text-align: left;
-    font-size: 14px;
-    transition: all 0.1s ease;
+.screen-panel { 
+    grid-area: screen; 
+    border-bottom: 2px solid #3d2b1d; 
+    position: relative; 
+    background: #050403; 
+    display: flex; 
+    justify-content: center; 
 }
-.btn:hover {
-    background-color: #3a3a4a;
-    border-color: #8a8a9a;
-    color: #ffcc00;
+
+.log-panel { 
+    grid-area: log; 
+    padding: 15px; 
+    border-right: 2px solid #3d2b1d; 
+    background: #120b08; 
+    display: flex; 
+    flex-direction: column; 
 }
-.btn:active {
-    transform: scale(0.98);
+
+/* Окно истории: страница пожелтевшего пергамента */
+.story-panel { 
+    grid-area: story; 
+    padding: 25px; 
+    border-right: 2px solid #3d2b1d; 
+    background: #241a15; /* Подпаленный пергамент */
+    overflow-y: auto;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+.actions-panel { 
+    grid-area: actions; 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    justify-content: center; 
+    background: #150e0b;
+}
+
+/* Стилизация верхнего инфо-бара (HUD) */
+.player-name { 
+    color: #e6caa3; 
+    font-size: 19px; 
+    font-variant: small-caps; /* Делает строчные буквы уменьшенными заглавными */
+    text-shadow: 1px 1px 3px #000;
+}
+.player-level { 
+    color: #b59269; 
+    font-size: 13px; 
+    font-style: italic;
+}
+.bars-container { display: flex; gap: 30px; }
+.player-currency { 
+    font-size: 18px; 
+    color: #d4af37; /* Цвет червонного золота */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Алхимические индикаторы эссенций */
+.stat-group { display: flex; align-items: center; gap: 10px; }
+.stat-label { 
+    font-size: 13px; 
+    font-weight: bold; 
+    color: #a67c52; 
+    font-family: sans-serif;
+}
+.bar-container { 
+    width: 170px; 
+    height: 14px; 
+    border: 1px solid #543d2b; 
+    background-color: #0d0806; 
+    padding: 1px;
+    border-radius: 3px; /* Легкое скругление для эффекта пробирки */
+}
+.bar-fill { 
+    height: 100%; 
+    width: 0; 
+    border-radius: 2px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+/* Матовые эссенции жизни и маны */
+.hp-fill { background: linear-gradient(to right, #801414, #b32424); box-shadow: 0 0 8px rgba(179, 36, 36, 0.4); }
+.mp-fill { background: linear-gradient(to right, #1d4473, #2b61a3); box-shadow: 0 0 8px rgba(43, 97, 163, 0.4); }
+
+/* Окна инвентаря и ячеек */
+.panel-title { 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    color: #8c6b4f; 
+    border-bottom: 1px solid #3d2b1d; 
+    padding-bottom: 4px; 
+    font-style: italic;
+}
+.equipment-slots, .bag-slots { display: flex; flex-direction: column; gap: 8px; }
+.slot, .item-btn { 
+    background: #1c1310; 
+    color: #c4b3a5; 
+    border: 1px solid #423023; 
+    padding: 9px; 
+    font-size: 13px; 
+    border-radius: 2px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+.empty { 
+    background: #0d0806; 
+    color: #4a3b32; 
+    border-style: dotted; 
+    box-shadow: none; 
+}
+.item-btn { 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+}
+.item-btn:hover { 
+    background: #2b1d18; 
+    color: #e6caa3; 
+    border-color: #8c6b4f; 
+}
+
+/* Окно локации */
+#location-img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    /* Накладывает на любой арт эффект сепии, старины и приглушает свет */
+    filter: sepia(50%) contrast(105%) brightness(65%); 
+}
+.effects-list { position: absolute; top: 15px; left: 15px; display: flex; gap: 8px; z-index: 10; }
+.effect-badge { 
+    padding: 3px 8px; 
+    border: 1px solid #423023; 
+    font-size: 11px; 
+    font-style: italic;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.buff { background: #1c331c; color: #a3c7a3; border-color: #2e542e; }
+.debuff { background: #3d1919; color: #caa3a3; border-color: #5e2828; }
+
+/* Текст квеста */
+#story-text { 
+    font-size: 16.5px; 
+    line-height: 1.6; 
+    color: #cbd1d6; 
+    text-shadow: 1px 1px 2px #000; 
+}
+
+/* Журнал хроник (Лог боя) */
+.log-title { font-size: 12px; color: #6e5541; text-transform: uppercase; margin-bottom: 6px; font-style: italic; }
+.log-content { 
+    flex-grow: 1; 
+    overflow-y: auto; 
+    background: #0a0605; 
+    border: 1px solid #291a12; 
+    padding: 10px; 
+    font-family: 'Courier New', monospace; 
+    font-size: 12px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+}
+.log-row { color: #8c8177; }
+.log-row.system { color: #829bb8; }
+.log-row.damage { color: #b85c5c; }
+
+/* Кнопки действий: как тисненые старинные печати */
+.btn { 
+    background-color: #211612; 
+    color: #a39081; 
+    border: 1px solid #4a3525; 
+    padding: 11px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: all 0.2s ease; 
+}
+.btn:hover { 
+    background-color: #33211a; 
+    color: #f2dec4; 
+    border-color: #8c694f; 
+    box-shadow: 0 0 10px rgba(140, 105, 79, 0.2);
+}
+.btn:active { 
+    background-color: #1a100d;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
 }
