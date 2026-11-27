@@ -188,3 +188,59 @@ actionButtons.addEventListener('click', (event) => {
 // ЗАПУСК ИГРЫ ПРИ ПЕРВОЙ ЗАГРУЗКЕ СТРАНИЦЫ
 updateUI();
 goToRoom("start");
+
+// ==========================================================================
+// 6. ИНВЕНТАРЬ: ИСПОЛЬЗОВАНИЕ ЗЕЛИЙ ИЗ СУМКИ
+// ==========================================================================
+
+// Храним количество банок в состоянии (state)
+let inventory = {
+    hpPotions: 2,
+    mpPotions: 1
+};
+
+const potionHpBtn = document.getElementById('potion-hp');
+const potionMpBtn = document.getElementById('potion-mp');
+
+// Клик по зелью здоровья
+potionHpBtn.addEventListener('click', () => {
+    if (inventory.hpPotions > 0) {
+        if (player.hp === 100) {
+            pushToLog("У вас уже максимальное здоровье!", "system");
+            return;
+        }
+        
+        inventory.hpPotions--; // Тратим банку
+        player.hp += 30;       // Лечим на 30 ОЗ
+        
+        // Обновляем текст кнопки в DOM, показывая новый остаток
+        potionHpBtn.textContent = `🧪 Зелье ОЗ (${inventory.hpPotions})`;
+        pushToLog("Вы выпили Зелье ОЗ и восстановили 30 здоровья.", "system");
+        
+        // Перерисовываем полоски
+        updateUI();
+    } else {
+        pushToLog("У вас закончились зелья здоровья!", "damage");
+    }
+});
+
+// Клик по зелью маны
+potionMpBtn.addEventListener('click', () => {
+    if (inventory.mpPotions > 0) {
+        if (player.mp === 100) {
+            pushToLog("У вас уже вся мана полная!", "system");
+            return;
+        }
+        
+        inventory.mpPotions--; // Тратим банку
+        player.mp += 30;       // Восстанавливаем 30 ОМ
+        
+        // Обновляем текст кнопки в DOM
+        potionMpBtn.textContent = `🧪 Зелье ОМ (${inventory.mpPotions})`;
+        pushToLog("Вы выпили Зелье ОМ и восстановили 30 маны.", "system");
+        
+        updateUI();
+    } else {
+        pushToLog("У вас закончились зелья маны!", "damage");
+    }
+});
